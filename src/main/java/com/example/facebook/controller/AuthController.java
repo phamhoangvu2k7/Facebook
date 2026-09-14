@@ -1,6 +1,8 @@
 package com.example.facebook.controller;
 
+import com.example.facebook.dto.request.LoginRequest;
 import com.example.facebook.dto.request.RegisterRequest;
+import com.example.facebook.dto.response.AuthResponse;
 import com.example.facebook.dto.response.UserResponse;
 import com.example.facebook.service.AuthService;
 import jakarta.validation.Valid;
@@ -22,5 +24,11 @@ public class AuthController {
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request) {
         UserResponse response = authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
     }
 }
