@@ -1,6 +1,7 @@
 package com.example.facebook.controller;
 
 import com.example.facebook.dto.request.LoginRequest;
+import com.example.facebook.dto.request.RefreshTokenRequest;
 import com.example.facebook.dto.request.RegisterRequest;
 import com.example.facebook.dto.response.AuthResponse;
 import com.example.facebook.dto.response.UserResponse;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
+
     @Autowired
     private AuthService authService;
 
@@ -29,6 +31,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
+        AuthResponse response = authService.refreshToken(request);
         return ResponseEntity.ok(response);
     }
 }
