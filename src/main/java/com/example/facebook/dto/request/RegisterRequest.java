@@ -1,9 +1,13 @@
 package com.example.facebook.dto.request;
 
+import com.example.facebook.enums.Gender;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -21,4 +25,10 @@ public class RegisterRequest {
 
     @NotBlank(message = "Họ và tên không được để trống")
     private String fullName;
+
+    @NotNull(message = "Ngày sinh không được để trống")
+    private LocalDate dateOfBirth;
+
+    @NotNull(message = "Giới tính không được để trống")
+    private Gender gender;
 }
